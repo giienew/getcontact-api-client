@@ -1,0 +1,45 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+debug.log
+error.log
+pnpm-debug.log*
+
+# Cache
+.cache/
+.tmp/
+dist/
+build/
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+
+# Output files
+captcha.jpg
+*.png
+*.jpg
+*.jpeg
+
+# Generated JSON / storage
+data.json
+*.db
+*.sqlite
+*.sqlite3
