@@ -28,11 +28,13 @@ Unofficial API Client untuk GetContact berbasis Node.js. Script ini memungkinkan
    cd repo-ini
 2. Install dependensi:
    npm install axios
-
+   
+---
 ## ⚙️ Konfigurasi
 
 Edit bagian CONFIG di file index.js sesuai data akun Anda:
 
+```javascript
 const CONFIG = {
 HOST: "pbssrv-centralevents.com",
 API_VER: "v2.8",
