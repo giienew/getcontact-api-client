@@ -25,7 +25,7 @@ Unofficial API Client untuk GetContact berbasis Node.js. Script ini memungkinkan
 
 1. Clone repo:
    git clone [https://github.com/giienew/getcontact-api-client.git](https://github.com/giienew/getcontact-api-client.git)
-   cd repo-ini
+   cd getcontact-api-client
 2. Install dependensi:
    npm install axios
    
@@ -49,7 +49,7 @@ NET_CC: "us",
 USER_AGENT: "Dalvik/2.1.0 (Linux; U; Android 10; Redmi Note 5 Pro Build/QQ3A.200805.001)",
 VALIDATE_PATH: "verify-code"
 };
-
+---
 ### Cara mendapatkan token & key
 
 * AES Key & Token: /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml (field: FINAL_KEY, TOKEN)
@@ -68,8 +68,10 @@ Jika API meminta verifikasi:
 • Terminal meminta input captcha
 • Setelah benar, request otomatis diulang
 
+---
 ## 📄 Contoh Output (Sukses)
 
+```json
 {
 "status": true,
 "meta": {
@@ -88,8 +90,9 @@ Jika API meminta verifikasi:
 "error": null
 }
 
+---
+
 ## ⚠️ Disclaimer
 
 Project ini dibuat untuk tujuan edukasi dan riset protokol aplikasi. Penggunaan yang melanggar privasi atau hukum sepenuhnya menjadi tanggung jawab pengguna. Risiko seperti banned akun, limit API, captcha, atau pemblokiran IP bukan tanggung jawab penulis. Gunakan dengan bijak.
 
----
