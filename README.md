@@ -1,6 +1,3 @@
-Siap, ini **versi full text langsung siap copas** tanpa blok kode, tanpa pemisah — tinggal tempel di README GitHub.
-
----
 
 # GetContact API Client (Node.js)
 
@@ -25,8 +22,8 @@ Unofficial API Client untuk GetContact berbasis Node.js. Script ini memungkinkan
 
 1. Clone repo:
    git clone [https://github.com/giienew/getcontact-api-client.git](https://github.com/giienew/getcontact-api-client.git)
-   cd getcontact-api-client
-2. Install dependensi:
+2. cd getcontact-api-client
+3. Install dependensi:
    npm install axios
    
 ---
