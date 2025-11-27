@@ -1,3 +1,7 @@
+Siap, ini **versi full text langsung siap copas** tanpa blok kode, tanpa pemisah — tinggal tempel di README GitHub.
+
+---
+
 # GetContact API Client (Node.js)
 
 Unofficial API Client untuk GetContact berbasis Node.js. Script ini memungkinkan Anda melakukan reverse lookup, memeriksa nama pemilik, melihat tags, serta menangani enkripsi AES/HMAC sesuai protokol aplikasi resmi. Output sepenuhnya JSON murni sehingga mudah diintegrasikan ke automation, bot, atau aplikasi lainnya.
@@ -20,7 +24,7 @@ Unofficial API Client untuk GetContact berbasis Node.js. Script ini memungkinkan
 ## 🚀 Instalasi
 
 1. Clone repo:
-   git clone [https://github.com/username/repo-ini.git](https://github.com/username/repo-ini.git)
+   git clone [https://github.com/giienew/getcontact-api-client.git](https://github.com/giienew/getcontact-api-client.git)
    cd repo-ini
 2. Install dependensi:
    npm install axios
@@ -48,7 +52,7 @@ VALIDATE_PATH: "verify-code"
 
 * AES Key & Token: /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml (field: FINAL_KEY, TOKEN)
 * HMAC Key: hasil dekripsi fungsi signing aplikasi (static/dynamic analysis)
-* Bisa juga melalui sniffing trafik memakai Burp, HTTP Toolkit, atau mitm proxy lain, jika rooted disarankan untuk memakai frida tools
+* Bisa juga melalui sniffing trafik memakai Burp, HTTP Toolkit, atau mitm proxy lain
 
 ## 📖 Penggunaan
 
@@ -86,3 +90,4 @@ Jika API meminta verifikasi:
 
 Project ini dibuat untuk tujuan edukasi dan riset protokol aplikasi. Penggunaan yang melanggar privasi atau hukum sepenuhnya menjadi tanggung jawab pengguna. Risiko seperti banned akun, limit API, captcha, atau pemblokiran IP bukan tanggung jawab penulis. Gunakan dengan bijak.
 
+---
