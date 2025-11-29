@@ -8,7 +8,7 @@
 <div align="center">
 
 ### OFFICIAL RELEASE BY:
-NB COMMUNITY
+[NB COMMUNITY](https://whatsapp.com/channel/0029Vb5EZCjIiRotHCI1213L)
 
 **Developed & Maintained by [gienetic](https://github.com/giienew)**
 
