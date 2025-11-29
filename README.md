@@ -1,4 +1,4 @@
-# 📱 GetContact API Client (Node.js)
+# GetContact API Client
 
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -7,7 +7,8 @@
 
 <div align="center">
 
-### OFFICIAL RELEASE BY NB COMMUNITY
+### OFFICIAL RELEASE BY:
+NB COMMUNITY
 
 **Developed & Maintained by [gienetic](https://github.com/giienew)**
 
