@@ -22,7 +22,7 @@ const CONFIG = {
   OS_STRING: "android 10",
   LANG: "en_US",
   NET_CC: "us",
-  USER_AGENT: "gienetic/NB-Team-Community (Linux; U; Android 10; Research Build/NB.2025.001)",
+  USER_AGENT: "Dalvik/2.1.0 (Linux; U; Android 10; Redmi Note 5 Pro Build/QQ3A.200805.001)",
   VALIDATE_PATH: "verify-code"
 };
 

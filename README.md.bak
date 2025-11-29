@@ -2,9 +2,26 @@
 
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![NB Community](https://img.shields.io/badge/Released%20by-NB%20Community-red.svg)](https://whatsapp.com/channel/0029Vb5EZCjIiRotHCI1213L)
 [![Author](https://img.shields.io/badge/author-gienetic-orange.svg)](https://github.com/giienew)
 
-> Unofficial API Client untuk GetContact berbasis Node.js dengan dukungan penuh untuk enkripsi AES/HMAC dan output JSON murni.
+<div align="center">
+
+### 🔥 OFFICIAL RELEASE BY NB COMMUNITY 🔥
+
+**Developed & Maintained by [gienetic](https://github.com/giienew)**
+
+---
+
+[![NB Community](https://img.shields.io/badge/🚀%20Join%20NB%20Community-WhatsApp-25D366?style=for-the-badge&logo=whatsapp)](https://whatsapp.com/channel/0029Vb5EZCjIiRotHCI1213L)
+
+*Indonesian Elite Network Sniffing, Web Scraping & Reverse Engineering Community*
+
+---
+
+</div>
+
+> **Unofficial API Client untuk GetContact berbasis Node.js** dengan dukungan penuh untuk enkripsi AES/HMAC dan output JSON murni.
 
 Script ini memungkinkan Anda melakukan reverse lookup nomor telepon, memeriksa nama pemilik, melihat tags yang diberikan pengguna lain, serta menangani enkripsi sesuai protokol aplikasi resmi GetContact dengan output JSON yang clean dan siap diintegrasikan.
 
@@ -35,21 +52,17 @@ Sebelum memulai, pastikan sistem Anda memiliki:
 
 ## 🚀 Instalasi
 
-1. **Clone repository ini:**
-   ```bash
-   git clone https://github.com/giienew/getcontact-api-client.git
-   cd getcontact-api-client
-   ```
+```bash
+# Clone repository
+git clone https://github.com/giienew/getcontact-api-client.git
+cd getcontact-api-client
 
-2. **Install dependensi:**
-   ```bash
-   npm install axios
-   ```
+# Install dependensi
+npm install axios
 
-3. **Verifikasi instalasi:**
-   ```bash
-   node index.js
-   ```
+# Verifikasi instalasi
+node index.js
+```
 
 ---
 
@@ -74,7 +87,7 @@ const CONFIG = {
 };
 ```
 
-### 🔑 Panduan Lengkap Ekstraksi Kredensial
+### 🔑 Cara Ekstraksi Kredensial
 
 #### **Method 1: Ekstraksi dari Android Device (Recommended)**
 
@@ -83,10 +96,6 @@ const CONFIG = {
 - ADB (Android Debug Bridge) terinstall
 
 **Langkah-langkah:**
-
-1. **Install GetContact** di device/emulator
-2. **Login** ke akun GetContact Anda
-3. **Ekstrak preferences file:**
 
 ```bash
 # Via ADB
@@ -99,64 +108,18 @@ su
 cat /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml
 ```
 
-4. **Buka file XML** dan cari nilai berikut:
-   - `FINAL_KEY` → Gunakan sebagai `AES_KEY_HEX`
-   - `TOKEN` → Gunakan sebagai `TOKEN`
-   - `DEVICE_ID` → Gunakan sebagai `DEVICE_ID`
-
-**Contoh isi file:**
-```xml
-<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
-<map>
-    <string name="FINAL_KEY">a1b2c3d4e5f6...</string>
-    <string name="TOKEN">eyJhbGciOiJIUzI1...</string>
-    <string name="DEVICE_ID">abc123-device-id</string>
-</map>
-```
+Cari nilai berikut di file XML:
+- `FINAL_KEY` → Gunakan sebagai `AES_KEY_HEX`
+- `TOKEN` → Gunakan sebagai `TOKEN`
+- `DEVICE_ID` → Gunakan sebagai `DEVICE_ID`
 
 #### **Method 2: Traffic Interception dengan MITM**
 
-**Tools yang dibutuhkan:**
-- [Burp Suite](https://portswigger.net/burp) / [HTTP Toolkit](https://httptoolkit.tech/) / [mitmproxy](https://mitmproxy.org/)
-- Device Android dengan SSL Pinning bypass (Frida, Xposed)
-
-**Langkah-langkah:**
-
-1. **Setup MITM Proxy** di laptop/PC
-2. **Install SSL Certificate** di Android device
-3. **Bypass SSL Pinning** menggunakan Frida:
-   ```bash
-   frida -U -f app.source.getcontact -l ssl-bypass.js --no-pause
-   ```
-4. **Buka GetContact** dan lakukan pencarian
-5. **Intercept request** dan ambil:
-   - Header `X-Token` → `TOKEN`
-   - Header `X-Client-Device-Id` → `DEVICE_ID`
-   - Header `X-Req-Signature` → Untuk reverse HMAC key
-   - Request body encrypted → Untuk reverse AES key
+Gunakan tools seperti Burp Suite, HTTP Toolkit, atau mitmproxy untuk intercept traffic dan ambil header `X-Token`, `X-Client-Device-Id`, dan data encrypted untuk reverse engineering.
 
 #### **Method 3: Reverse Engineering APK**
 
-**Tools:**
-- [JADX](https://github.com/skylot/jadx)
-- [APKTool](https://ibotpeaches.github.io/Apktool/)
-- Frida (untuk dynamic analysis)
-
-**Target:**
-- `HMAC_KEY_HEX`: Biasanya hardcoded atau di-obfuscate dalam native library
-- Cari di file `.so` di folder `lib/` dalam APK
-
-**Perintah dasar:**
-```bash
-# Decompile APK
-jadx-gui getcontact.apk
-
-# Extract APK
-apktool d getcontact.apk
-
-# Analyze native libraries
-strings lib/arm64-v8a/libnative.so | grep -i "key\|secret"
-```
+Gunakan JADX atau APKTool untuk decompile APK dan cari key yang di-hardcode di native library.
 
 ---
 
@@ -168,20 +131,16 @@ strings lib/arm64-v8a/libnative.so | grep -i "key\|secret"
 node index.js <NOMOR_TELEPON>
 ```
 
-### Contoh Lengkap
+### Contoh
 
-**Format Indonesia:**
 ```bash
+# Format Indonesia
 node index.js 081234567890
 node index.js +6281234567890
-node index.js 6281234567890
-```
 
-**Format Internasional:**
-```bash
+# Format Internasional
 node index.js +12025550123      # USA
 node index.js +447911123456     # UK
-node index.js +639171234567     # Philippines
 ```
 
 ### Automasi dengan Script
@@ -192,78 +151,31 @@ node index.js +639171234567     # Philippines
 while IFS= read -r number; do
   echo "Checking: $number"
   node index.js "$number" >> results.json
-  sleep 2  # Rate limiting
+  sleep 2
 done < numbers.txt
-```
-
-**Python wrapper:**
-```python
-import subprocess
-import json
-
-def lookup_number(phone):
-    result = subprocess.run(
-        ['node', 'index.js', phone],
-        capture_output=True,
-        text=True
-    )
-    return json.loads(result.stdout)
-
-# Usage
-info = lookup_number('+6281234567890')
-print(f"Name: {info['data']['name']}")
-print(f"Tags: {info['data']['tags']}")
 ```
 
 ---
 
 ## 🛡️ Penanganan Captcha
 
-### Automatic Captcha Flow
+Ketika API memerlukan verifikasi captcha, script akan:
 
-Ketika API memerlukan verifikasi captcha (biasanya setelah beberapa request):
+1. Menyimpan captcha ke file `captcha.jpg`
+2. Meminta input kode dari user
+3. Validasi kode
+4. Retry request secara otomatis
 
-```
-┌─────────────────────────────────────────┐
-│  1. Request ke API                       │
-│  2. Terdeteksi perlu captcha (403004)   │
-│  3. Captcha disimpan ke captcha.jpg     │
-│  4. User diminta input kode             │
-│  5. Validasi kode                        │
-│  6. Jika valid → retry request          │
-│  7. Jika invalid → ulangi step 3-6      │
-└─────────────────────────────────────────┘
-```
-
-### Example Output Saat Captcha
-
-```
-[!] Validation required (1/5). Image saved: captcha.jpg
-Enter captcha code: AB12CD
-[+] Validation success, retrying search...
-
-{
-  "status": true,
-  "meta": {
-    "timestamp": "2025-11-28T10:30:45.123Z",
-    "phone": "+6281234567890"
-  },
-  "data": { ... }
-}
-```
-
-### Tips Menghindari Captcha
-
-- ✅ Gunakan delay antar request (2-5 detik)
-- ✅ Jangan melakukan burst requests
-- ✅ Gunakan proxy rotation jika melakukan bulk lookup
-- ✅ Batasi maksimal 50-100 requests per hari per akun
+**Tips menghindari captcha:**
+- Gunakan delay 2-5 detik antar request
+- Batasi maksimal 50-100 requests per hari
+- Jangan melakukan burst requests
 
 ---
 
 ## 📊 Format Output
 
-### ✅ Response Sukses Lengkap
+### ✅ Response Sukses
 
 ```json
 {
@@ -274,44 +186,17 @@ Enter captcha code: AB12CD
   },
   "data": {
     "name": "Echa Putri",
-    "tags": [
-      "Customer Service",
-      "Online Shop",
-      "Tokopedia Seller"
-    ],
-    "tagsCount": 3,
+    "tags": ["Customer Service", "Online Shop"],
+    "tagsCount": 2,
     "usage": {
-      "search": {
-        "used": 199,
-        "limit": 200
-      },
-      "detail": {
-        "used": 145,
-        "limit": 150
-      }
-    },
-    "raw": {
-      "profile": {
-        "displayName": "Echa Putri",
-        "phoneNumber": "+6282173230348",
-        "countryCode": "62"
-      },
-      "subscription": {
-        "isPremium": false,
-        "usage": {
-          "search": {
-            "remainingCount": 199,
-            "limit": 200
-          }
-        }
-      }
+      "search": { "used": 199, "limit": 200 },
+      "detail": { "used": 145, "limit": 150 }
     }
-  },
-  "error": null
+  }
 }
 ```
 
-### ❌ Response Error - Rate Limit
+### ❌ Response Error
 
 ```json
 {
@@ -325,173 +210,38 @@ Enter captcha code: AB12CD
 }
 ```
 
-### ❌ Response Error - Invalid Token
-
-```json
-{
-  "status": false,
-  "meta": {
-    "timestamp": "2025-11-28T10:30:45.123Z",
-    "phone": "+6281234567890"
-  },
-  "data": null,
-  "error": "401: Unauthorized - Invalid or expired token"
-}
-```
-
-### ⚠️ Response - Nomor Tidak Ditemukan
-
-```json
-{
-  "status": true,
-  "meta": {
-    "timestamp": "2025-11-28T10:30:45.123Z",
-    "phone": "+6281234567890"
-  },
-  "data": {
-    "name": null,
-    "tags": [],
-    "tagsCount": 0,
-    "usage": {
-      "search": {
-        "used": 200,
-        "limit": 200
-      },
-      "detail": null
-    },
-    "raw": {
-      "profile": {},
-      "subscription": {}
-    }
-  },
-  "error": null
-}
-```
-
 ---
 
 ## 🔧 Troubleshooting
 
-### 🔴 Error: "Invalid AES Key Hex"
-
-**Penyebab:** AES Key tidak valid atau format salah
-
-**Solusi:**
-```bash
-# Pastikan key dalam format hex (panjang 32, 48, atau 64 karakter)
-# Contoh valid: "a1b2c3d4e5f6..." (64 karakter untuk AES-256)
-```
-
-### 🔴 Error: "403004: Validation is required"
-
-**Penyebab:** API meminta captcha verification
-
-**Solusi:** Script akan otomatis handle ini:
-1. Captcha disimpan sebagai `captcha.jpg`
-2. Buka file dan lihat kode
-3. Input kode saat diminta
-4. Request akan diulang otomatis
-
-### 🔴 Error: "403003: Daily search limit exceeded"
-
-**Penyebab:** Limit harian tercapai (biasanya 200 searches/hari)
-
-**Solusi:**
-- Tunggu 24 jam untuk reset
-- Gunakan akun berbeda
-- Upgrade ke premium (jika tersedia)
-
-### 🔴 Error: "401: Unauthorized"
-
-**Penyebab:** Token expired atau invalid
-
-**Solusi:**
-```bash
-# 1. Re-extract token dari device
-adb pull /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml
-
-# 2. Update TOKEN di CONFIG
-# 3. Pastikan DEVICE_ID juga match
-```
-
-### 🔴 Error: "Decrypt Failed"
-
-**Penyebab:** AES Key atau HMAC Key salah
-
-**Solusi:**
-- Verifikasi `AES_KEY_HEX` dari field `FINAL_KEY`
-- Pastikan tidak ada spasi atau karakter tambahan
-- Key harus dalam format hex murni
-
-### 🔴 Rate Limiting / IP Block
-
-**Gejala:** Request selalu timeout atau error 429
-
-**Solusi:**
-```bash
-# Gunakan proxy
-export HTTP_PROXY=http://proxy-server:8080
-export HTTPS_PROXY=http://proxy-server:8080
-node index.js +6281234567890
-
-# Atau edit axios config di index.js:
-const client = axios.create({
-  proxy: {
-    host: 'proxy-server',
-    port: 8080
-  },
-  // ... config lainnya
-});
-```
-
----
-
-## 📁 File Output
-
-Script akan menghasilkan beberapa file debug:
-
-| File | Deskripsi |
-|------|-----------|
-| `resp_data.b64` | Response terenkripsi dari API (Base64) |
-| `resp_data.dec.json` | Response terdekripsi (JSON) |
-| `captcha.jpg` | Gambar captcha (jika diminta) |
-
-**Catatan:** File-file ini berguna untuk debugging. Pastikan `.gitignore` sudah mencakup file-file ini.
+| Error | Penyebab | Solusi |
+|-------|----------|--------|
+| **Invalid AES Key** | Format key salah | Pastikan key dalam format hex (64 karakter) |
+| **403004: Validation required** | Captcha diminta | Input kode dari `captcha.jpg` |
+| **403003: Limit exceeded** | Limit harian tercapai | Tunggu 24 jam atau gunakan akun lain |
+| **401: Unauthorized** | Token expired | Re-extract token dari device |
+| **Decrypt Failed** | AES/HMAC key salah | Verifikasi key dari `FINAL_KEY` |
 
 ---
 
 ## 🔒 Security Best Practices
 
-### ⚠️ Jangan Hardcode Credentials
+**❌ Jangan hardcode credentials:**
 
-**❌ Bad Practice:**
 ```javascript
+// Bad
 const CONFIG = {
-  TOKEN: "eyJhbGciOiJIUzI1...",  // Hardcoded!
-  AES_KEY_HEX: "a1b2c3d4...",    // Exposed!
-  // ...
+  TOKEN: "NbToken321...",
 };
 ```
 
-**✅ Good Practice:**
-```javascript
-require('dotenv').config();
+**✅ Gunakan environment variables:**
 
-const CONFIG = {
-  TOKEN: process.env.GETCONTACT_TOKEN,
-  AES_KEY_HEX: process.env.GETCONTACT_AES_KEY,
-  HMAC_KEY_HEX: process.env.GETCONTACT_HMAC_KEY,
-  DEVICE_ID: process.env.GETCONTACT_DEVICE_ID,
-  // ...
-};
-```
-
-**Setup `.env` file:**
 ```bash
 # Install dotenv
 npm install dotenv
 
-# Create .env file
+# Buat file .env
 cat > .env << EOF
 GETCONTACT_TOKEN=your_token_here
 GETCONTACT_AES_KEY=your_aes_key_here
@@ -499,82 +249,37 @@ GETCONTACT_HMAC_KEY=your_hmac_key_here
 GETCONTACT_DEVICE_ID=your_device_id_here
 EOF
 
-# Add to .gitignore
+# Tambahkan ke .gitignore
 echo ".env" >> .gitignore
 ```
 
-### 🔐 Proteksi Kredensial
-
-```bash
-# Enkripsi file config dengan GPG
-gpg -c config.json
-
-# Decrypt saat dibutuhkan
-gpg -d config.json.gpg > config.json
-
-# Hapus plaintext setelah selesai
-rm config.json
+```javascript
+// Good
+require('dotenv').config();
+const CONFIG = {
+  TOKEN: process.env.GETCONTACT_TOKEN,
+};
 ```
 
 ---
 
 ## 🚀 Advanced Usage
 
-### Integrasi dengan Database
-
-**Simpan hasil ke MongoDB:**
-```javascript
-const mongoose = require('mongoose');
-const { exec } = require('child_process');
-
-const ContactSchema = new mongoose.Schema({
-  phone: String,
-  name: String,
-  tags: [String],
-  checkedAt: Date
-});
-
-const Contact = mongoose.model('Contact', ContactSchema);
-
-function lookupAndSave(phone) {
-  exec(`node index.js ${phone}`, (err, stdout) => {
-    const result = JSON.parse(stdout);
-    if (result.status) {
-      Contact.create({
-        phone: result.meta.phone,
-        name: result.data.name,
-        tags: result.data.tags,
-        checkedAt: new Date(result.meta.timestamp)
-      });
-    }
-  });
-}
-```
-
 ### REST API Wrapper
 
-**Express.js wrapper:**
 ```javascript
 const express = require('express');
 const { exec } = require('child_process');
 const app = express();
 
 app.get('/lookup/:phone', (req, res) => {
-  const phone = req.params.phone;
-  
-  exec(`node index.js ${phone}`, (err, stdout) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
+  exec(`node index.js ${req.params.phone}`, (err, stdout) => {
+    if (err) return res.status(500).json({ error: err.message });
     res.json(JSON.parse(stdout));
   });
 });
 
-app.listen(3000, () => {
-  console.log('API running on http://localhost:3000');
-});
-
-// Usage: curl http://localhost:3000/lookup/+6281234567890
+app.listen(3000);
 ```
 
 ### Telegram Bot Integration
@@ -587,22 +292,14 @@ const bot = new TelegramBot('YOUR_BOT_TOKEN', { polling: true });
 
 bot.onText(/\/lookup (.+)/, (msg, match) => {
   const phone = match[1];
-  const chatId = msg.chat.id;
-  
-  bot.sendMessage(chatId, '🔍 Searching...');
+  bot.sendMessage(msg.chat.id, '🔍 Searching...');
   
   exec(`node index.js ${phone}`, (err, stdout) => {
     const result = JSON.parse(stdout);
-    
     if (result.status && result.data.name) {
-      bot.sendMessage(chatId, 
-        `📱 *${result.meta.phone}*\n` +
-        `👤 Name: ${result.data.name}\n` +
-        `🏷️ Tags: ${result.data.tags.join(', ') || 'None'}`,
-        { parse_mode: 'Markdown' }
+      bot.sendMessage(msg.chat.id, 
+        `📱 ${result.meta.phone}\n👤 ${result.data.name}\n🏷️ ${result.data.tags.join(', ')}`
       );
-    } else {
-      bot.sendMessage(chatId, '❌ Number not found');
     }
   });
 });
@@ -612,136 +309,62 @@ bot.onText(/\/lookup (.+)/, (msg, match) => {
 
 ## 🤝 Contributing
 
-Kontribusi sangat diterima! Berikut cara berkontribusi:
-
-### 1. Fork & Clone
+Kontribusi sangat diterima! Caranya:
 
 ```bash
-# Fork repo di GitHub, lalu:
+# Fork repo, lalu:
 git clone https://github.com/YOUR_USERNAME/getcontact-api-client.git
-cd getcontact-api-client
-```
-
-### 2. Buat Branch Baru
-
-```bash
 git checkout -b feature/awesome-feature
+
+# Buat perubahan, lalu:
+git commit -m "Add: awesome feature"
+git push origin feature/awesome-feature
 ```
 
-### 3. Commit Changes
-
-```bash
-git add .
-git commit -m "Add: awesome new feature"
-```
-
-**Commit message format:**
+**Commit format:**
 - `Add:` untuk fitur baru
 - `Fix:` untuk bug fixes
 - `Update:` untuk improvements
 - `Docs:` untuk dokumentasi
-
-### 4. Push & Pull Request
-
-```bash
-git push origin feature/awesome-feature
-```
-
-Lalu buat Pull Request di GitHub dengan deskripsi lengkap.
-
-### 📋 Contribution Guidelines
-
-- ✅ Ikuti existing code style
-- ✅ Tambahkan tests jika memungkinkan
-- ✅ Update dokumentasi jika perlu
-- ✅ Test secara menyeluruh sebelum PR
-- ✅ Satu PR = satu fitur/fix
 
 ---
 
 ## 📝 Roadmap
 
 ### Version 2.0
-- [ ] **Batch Lookup** — Support multiple numbers dalam satu run
-- [ ] **Rate Limiting** — Auto throttling untuk avoid ban
-- [ ] **Proxy Rotation** — Built-in proxy rotation support
-- [ ] **Result Caching** — Cache hasil untuk avoid duplicate requests
-
-### Version 2.5
-- [ ] **CLI Interface** — Interactive CLI dengan commander.js
-- [ ] **Export Formats** — Export ke CSV, Excel, JSON
-- [ ] **Config Manager** — GUI untuk manage multiple accounts
-- [ ] **Logging System** — Structured logging dengan Winston
+- [ ] Batch lookup untuk multiple numbers
+- [ ] Auto rate limiting
+- [ ] Proxy rotation support
+- [ ] Result caching
 
 ### Version 3.0
-- [ ] **Docker Support** — Containerized deployment
-- [ ] **Web Dashboard** — Simple web UI untuk monitoring
-- [ ] **Webhook Support** — Push results ke webhook endpoints
-- [ ] **Database Integration** — Built-in support untuk MongoDB/PostgreSQL
-
-### Future Ideas
-- [ ] OCR Captcha Solver dengan Tesseract
-- [ ] Machine Learning untuk auto tag prediction
-- [ ] GraphQL API wrapper
-- [ ] Real-time monitoring dashboard
-- [ ] Multi-account rotation system
-
-**Vote untuk fitur yang Anda inginkan di [Issues](https://github.com/giienew/getcontact-api-client/issues)!**
+- [ ] Docker support
+- [ ] Web dashboard
+- [ ] Database integration
+- [ ] OCR captcha solver
 
 ---
 
 ## ⚠️ Disclaimer
 
-### Legal Notice
+**PENTING - HARAP DIBACA:**
 
-Project ini dibuat **untuk tujuan edukasi dan riset protokol aplikasi**.
+⚠️ Project ini dibuat untuk **tujuan edukasi dan riset** protokol aplikasi.
 
-**SANGAT PENTING - HARAP DIBACA:**
-
-⚠️ **Tentang Privasi:**
+**Tentang Privasi:**
 - Tool ini dapat mengakses informasi pribadi orang lain
 - Penggunaan untuk stalking, harassment, atau tujuan jahat **DILARANG KERAS**
-- Hormati privasi orang lain - jangan menyalahgunakan informasi yang didapat
+- Hormati privasi orang lain
 
-⚠️ **Tentang Legalitas:**
-- Penggunaan yang melanggar privasi atau hukum sepenuhnya tanggung jawab pengguna
-- Beberapa negara memiliki undang-undang ketat tentang data pribadi (GDPR, dll)
-- Pastikan penggunaan Anda comply dengan hukum lokal
+**Tentang Risiko:**
+- Account ban jika penggunaan berlebihan
+- Rate limiting dan IP block
+- GetContact dapat mengubah API kapan saja
+- Tool ini **TIDAK BERAFILIASI** dengan GetContact
 
-⚠️ **Tentang Risiko Teknis:**
-- **Account Ban** — Penggunaan berlebihan dapat menyebabkan akun di-banned
-- **Rate Limiting** — GetContact membatasi jumlah request per hari
-- **IP Block** — Terlalu banyak request dapat memblock IP Anda
-- **Captcha** — Frequent usage akan trigger captcha verification
-- **API Changes** — GetContact dapat mengubah API tanpa pemberitahuan
-
-⚠️ **Tentang Tool:**
-- Tool ini **TIDAK BERAFILIASI** dengan GetContact atau pengembang resminya
-- Tidak ada jaminan tool akan terus berfungsi selamanya
-- Penulis tidak bertanggung jawab atas kerugian akibat penggunaan tool ini
-
-### Penggunaan yang Diperbolehkan
-
-✅ **Acceptable Use:**
-- Verifikasi nomor telepon Anda sendiri
-- Riset keamanan dan edukasi
-- Checking spam/scam numbers
-- Personal use dalam batas wajar
-
-❌ **Prohibited Use:**
-- Mass scraping untuk komersial
-- Harassment atau stalking
-- Selling scraped data
-- Violating privacy laws
-- Any illegal activities
-
-### Pengakuan
-
-> Dengan menggunakan tool ini, Anda menyatakan bahwa:
-> - Anda telah membaca dan memahami disclaimer ini
-> - Anda akan menggunakan tool ini secara bertanggung jawab
-> - Anda memahami dan menerima semua risiko yang ada
-> - Anda tidak akan menyalahgunakan informasi yang didapat
+**Penggunaan yang Diperbolehkan:**
+✅ Verifikasi nomor sendiri, riset keamanan, checking spam
+❌ Mass scraping, harassment, selling data, illegal activities
 
 **USE AT YOUR OWN RISK. BE RESPONSIBLE. RESPECT PRIVACY.**
 
@@ -749,65 +372,90 @@ Project ini dibuat **untuk tujuan edukasi dan riset protokol aplikasi**.
 
 ## 📄 License
 
-Project ini dilisensikan under **MIT License**.
-
-```
-MIT License
-
-Copyright (c) 2025 gienetic
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-[Full License Text](LICENSE)
+Project ini dilisensikan under **MIT License** - lihat file [LICENSE](LICENSE) untuk detail lengkap.
 
 ---
 
-## 👤 Author
+## 🏆 Credits & Development Team
 
-**gienetic**
+<div align="center">
 
+### 🌟 Released & Powered by 🌟
+
+<img src="https://img.shields.io/badge/NB%20COMMUNITY-Official%20Release-red?style=for-the-badge" alt="NB Community">
+
+**NB COMMUNITY**  
+*Indonesian Elite Network Sniffing, Web Scraping & Reverse Engineering Community*
+
+Komunitas eksklusif para researcher, developer, dan security enthusiast Indonesia yang fokus pada:
+- 🔍 Network Traffic Analysis & Sniffing
+- 🕷️ Advanced Web Scraping Techniques  
+- 🔐 Protocol Reverse Engineering
+- 🛡️ Security Research & Penetration Testing
+- 🤖 API Development & Automation
+
+[![Join NB Community](https://img.shields.io/badge/📢%20Join%20Our%20WhatsApp%20Channel-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://whatsapp.com/channel/0029Vb5EZCjIiRotHCI1213L)
+
+---
+
+### 👨‍💻 Lead Developer & Maintainer
+
+**gienetic** - *Lead Developer & Protocol Researcher*
+
+Specialized in protocol reverse engineering, encryption/decryption systems, dan API development. Member aktif NB Community yang berkontribusi dalam riset dan development berbagai tools untuk security research dan automation.
+
+[![GitHub](https://img.shields.io/badge/GitHub-@giienew-181717?style=flat&logo=github)](https://github.com/giienew)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-+62%20895--0547--2234-25D366?style=flat&logo=whatsapp)](https://wa.me/6289505472234)
+
+---
+
+### 🤝 Special Thanks
+
+Terima kasih kepada seluruh member **NB Community** yang telah berkontribusi dalam:
+- Knowledge sharing tentang protokol GetContact
+- Testing dan bug reporting
+- Feedback untuk improvement
+- Support moral dan teknis
+
+</div>
+
+---
+
+## 💬 Contact & Support
+
+### 📧 Get in Touch
+
+**For Collaboration & Questions:**
+- 👤 Developer: **gienetic**
+- 📱 WhatsApp: [+62 895-0547-2234](https://wa.me/6289505472234)
 - 🐙 GitHub: [@giienew](https://github.com/giienew)
-- 📧 Issues: [Report Bug](https://github.com/giienew/getcontact-api-client/issues)
-- 💡 Discussions: [Feature Requests](https://github.com/giienew/getcontact-api-client/discussions)
+- 🐛 Report Issues: [GitHub Issues](https://github.com/giienew/getcontact-api-client/issues)
+- 💡 Feature Requests: [GitHub Discussions](https://github.com/giienew/getcontact-api-client/discussions)
 
----
-
-## 🙏 Acknowledgments
-
-- GetContact team untuk aplikasi yang powerful
-- Community contributors yang membantu improve tool ini
-- Semua yang memberikan feedback dan bug reports
+**Join Our Community:**
+- 📢 WhatsApp Channel: [NB Community Official](https://whatsapp.com/channel/0029Vb5EZCjIiRotHCI1213L)
+- 🤝 Collaborate, share knowledge, dan belajar bersama para expert!
 
 ---
 
 ## ⭐ Support This Project
 
-Jika project ini membantu Anda, pertimbangkan untuk:
+Jika project ini bermanfaat untuk Anda:
 
 - ⭐ **Star** repository ini di GitHub
+- 🔔 **Follow** untuk update terbaru
+- 📢 **Share** ke teman-teman developer Anda
 - 🐛 **Report bugs** yang Anda temukan
-- 💡 **Suggest features** yang Anda inginkan
-- 📖 **Improve documentation**
-- 🔀 **Submit Pull Requests**
+- 💡 **Suggest features** melalui Issues
+- 🔀 **Submit Pull Requests** untuk improvement
 
-Setiap bentuk kontribusi sangat dihargai! 🙌
+Jangan lupa **join NB Community** untuk:
+- 📚 Akses ke exclusive tutorials & resources
+- 🎯 Networking dengan expert developers
+- 🔥 Early access ke tools & projects terbaru
+- 💬 24/7 support dari community members
+
+[![Join Now](https://img.shields.io/badge/🚀%20Join%20NB%20Community%20Now-Click%20Here-red?style=for-the-badge)](https://whatsapp.com/channel/0029Vb5EZCjIiRotHCI1213L)
 
 ---
 
@@ -815,13 +463,29 @@ Setiap bentuk kontribusi sangat dihargai! 🙌
 
 ![GitHub stars](https://img.shields.io/github/stars/giienew/getcontact-api-client?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/giienew/getcontact-api-client?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/giienew/getcontact-api-client?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/giienew/getcontact-api-client)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/giienew/getcontact-api-client)
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ for educational purposes</sub>
-  <br>
-  <sub>© 2025 gienetic. All rights reserved.</sub>
+
+### 🎯 Made with 💙 for Educational & Research Purposes
+
+**Official Release by NB Community**  
+Developed & Maintained by **gienetic**
+
+---
+
+*"Knowledge is meant to be shared, security is meant to be improved"*
+
+---
+
+[![NB Community](https://img.shields.io/badge/NB%20Community-Official%20Release-red?style=flat-square)](https://whatsapp.com/channel/0029Vb5EZCjIiRotHCI1213L)
+[![Author](https://img.shields.io/badge/Author-gienetic-orange?style=flat-square)](https://github.com/giienew)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+
+**© 2025 NB Community & gienetic. All rights reserved.**
+
 </div>
