@@ -7,7 +7,7 @@
 
 <div align="center">
 
-### 🔥 OFFICIAL RELEASE BY NB COMMUNITY 🔥
+### OFFICIAL RELEASE BY NB COMMUNITY
 
 **Developed & Maintained by [gienetic](https://github.com/giienew)**
 
