@@ -154,6 +154,8 @@ jadx-gui getcontact.apk
 # Extract APK
 apktool d getcontact.apk
 
+# Analyze native libraries
+strings lib/arm64-v8a/libnative.so | grep -i "key\|secret"
 ```
 
 ---
